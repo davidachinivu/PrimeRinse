@@ -140,23 +140,27 @@
                 <p class="section-subtitle" style="margin-bottom: 30px;">Fill out the form below and we'll get back to
                     you with a free, no-obligation estimate.</p>
 
-                <form id="quoteForm">
+                <form id="quoteForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="36de0c2c-f642-46bc-9744-74993ae68ee6">
+                    <input type="hidden" name="subject" value="New Quote Request from PrimeRinse Website">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
-                            <input type="text" id="name" class="form-control" required placeholder="John Doe">
+                            <input type="text" id="name" name="name" class="form-control" required placeholder="John Doe">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" class="form-control" required placeholder="346-219-4910">
+                            <input type="tel" id="phone" name="phone" class="form-control" required placeholder="346-219-4910">
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" required placeholder="john@example.com">
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="john@example.com">
                         </div>
                         <div class="form-group">
                             <label for="service">Service Needed *</label>
-                            <select id="service" class="form-control" required>
+                            <select id="service" name="service_requested" class="form-control" required>
                                 <option value="" disabled selected>Select a service</option>
                                 <option value="driveway">Driveway Pressure Washing</option>
                                 <option value="sidewalk">Sidewalk Cleaning</option>
@@ -169,7 +173,7 @@
 
                         <div class="form-group full-width">
                             <label for="message">Additional Information</label>
-                            <textarea id="message" class="form-control"
+                            <textarea id="message" name="message" class="form-control"
                                 placeholder="Tell us more about the project..."></textarea>
                         </div>
                         <div class="form-group full-width" style="margin-bottom: 0;">

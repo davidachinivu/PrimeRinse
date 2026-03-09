@@ -88,13 +88,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
                 btn.disabled = true;
 
-                // Simulate API Call delays
-                setTimeout(() => {
-                    alert('Thank you! Your quote request has been sent successfully. We will contact you soon.');
-                    quoteForm.reset();
+                // Prepare form data for Web3Forms
+                const formData = new FormData(quoteForm);
+                const object = Object.fromEntries(formData);
+                const json = JSON.stringify(object);
+
+                // Send data using fetch API
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        alert('Thank you! Your quote request has been sent successfully. We will contact you soon.');
+                        quoteForm.reset();
+                    } else {
+                        console.log(response);
+                        alert(json.message);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert("Something went wrong! Please try again later.");
+                })
+                .finally(() => {
                     btn.textContent = originalText;
                     btn.disabled = false;
-                }, 1500);
+                });
             } else {
                 alert('Please fill in all required fields.');
             }
